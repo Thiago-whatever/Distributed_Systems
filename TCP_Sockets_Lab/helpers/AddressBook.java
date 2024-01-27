@@ -1,4 +1,4 @@
-package server;
+package helpers;
 
 class AddressBook {
     private Person[] myAddressBook;

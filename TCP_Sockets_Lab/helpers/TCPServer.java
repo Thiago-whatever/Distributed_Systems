@@ -1,4 +1,4 @@
-package participants;
+package helpers;
 
 import java.net.*;
 import java.io.*;
