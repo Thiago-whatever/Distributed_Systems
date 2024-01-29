@@ -1,5 +1,10 @@
-package TCP_Sockets_Lab.client;
+package client;
 
-public class ClientThread {
-    
-}
+public class ClientThread extends Thread{
+    public ClientThread(){
+
+    }
+
+    public void run(){
+        
+    }
