@@ -1,5 +1,12 @@
 package client;
 
-public class ClientThread {
+public class ClientThread extends Thread{
+    public ClientThread(){
+
+    }
+
+    public void run(){
+        
+    }
     
 }
