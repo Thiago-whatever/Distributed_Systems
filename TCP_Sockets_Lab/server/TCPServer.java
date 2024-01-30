@@ -26,12 +26,16 @@ class Connection extends Thread {
     private DataInputStream in;
     private DataOutputStream out;
     private Socket clientSocket;
+    private AddressBook addressBook;
+    private int k;
 
     public Connection(Socket aClientSocket) {
         try {
             clientSocket = aClientSocket;
             in = new DataInputStream(clientSocket.getInputStream());
             out = new DataOutputStream(clientSocket.getOutputStream());
+            addressBook = new AddressBook();
+            k = 12;
         } catch (IOException e) {
             System.out.println("Connection:" + e.getMessage());
         }
@@ -40,12 +44,42 @@ class Connection extends Thread {
     @Override
     public void run() {
         try {
-            // an echo server
             String data = in.readUTF();         // recibo solicitud
+            int key = Integer.parseInt(data);
+            k = key;
+            while(k != -1){
+                
 
-            System.out.println("Message received from: " + clientSocket.getRemoteSocketAddress());
+                System.out.println("Message received from: " + clientSocket.getRemoteSocketAddress());
 
-            out.writeUTF(data);                // envio respuesta
+                try{
+                    
+                    String aux = addressBook.getRecord(key).getName();
+                    if(aux != null && aux != "")
+                        data = "El nombre del usuario con clave "+key+" es: "+aux;
+                    else
+                        data = "Eres tonto?";
+                }catch(Exception e){
+                    System.out.println("No enviaste una llave: "+e);
+                }
+
+                out.writeUTF(data);                // envio respuesta
+
+                data = in.readUTF();         // recibo solicitud
+                key = Integer.parseInt(data);
+                k = key;
+            }
+
+            if(k == -1){
+                try{
+                    out.writeUTF("Bye");
+                    System.out.println("H9la");
+
+                }catch(IOException e){
+                    System.out.println("chin :(");
+                }
+            }
+            
 
         } catch (EOFException e) {
             System.out.println("EOF:" + e.getMessage());
