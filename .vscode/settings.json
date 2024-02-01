@@ -3,7 +3,8 @@
         "UDPSockets",
         "TCP_Sockets_Lab",
         "TCPSockets",
+        "IPMulticast",
         "HolaMundo/src",
-        "IPMulticast"
+        "IPMulticastClock"
     ]
 }
