@@ -3,6 +3,8 @@ import java.net.DatagramPacket;
 import java.net.InetAddress;
 import java.net.MulticastSocket;
 import java.net.SocketException;
+import java.util.*;
+
 
 /**
  * @author Octavio Gutierrez
@@ -19,13 +21,23 @@ public class MulticastSenderPeer {
             socket = new MulticastSocket(49155);
             socket.joinGroup(group);
             //s.setTimeToLive(10);
-            System.out.println("Messages' TTL (Time-To-Live): " + socket.getTimeToLive());
-            String myMessage = "Hello";
-            byte[] m = myMessage.getBytes();
-            DatagramPacket messageOut = new DatagramPacket(m, m.length, group, 49155);
-            //no hay costo de entrada/salida, no hay conexion
-            socket.send(messageOut);
-            socket.leaveGroup(group);
+            while(true){
+                System.out.println("Messages' TTL (Time-To-Live): " + socket.getTimeToLive());
+                String currentDate = (new Date()).toString();
+                byte[] m = currentDate.getBytes();
+                DatagramPacket messageOut = new DatagramPacket(m, m.length, group, 49155);
+                //no hay costo de entrada/salida, no hay conexion
+                socket.send(messageOut);
+                //socket.leaveGroup(group);
+                try {
+                    Thread.sleep(2000);
+                } catch (InterruptedException e) {
+                    // TODO Auto-generated catch block
+                    e.printStackTrace();
+                }
+            }
+            
+           
         } catch (SocketException e) {
             System.out.println("Socket: " + e.getMessage());
         } catch (IOException e) {
