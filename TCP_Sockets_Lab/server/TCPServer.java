@@ -41,6 +41,16 @@ class Connection extends Thread {
         }
     }
 
+
+    /*
+     * Incluir el while es para evitar tumbar el puente cada vez que se responde al cliente
+     * Si mi cliente va a estar mandando miles de mensajes, no tiene sentido construir un puente
+     * por cada mensaje, mas bien, mantengo un solo puente para atender a todos los mensajes. Si no 
+     * hago esto, generaria miles de hilos innecesarios y haria que mi sistema no pudiera aguantar una 
+     * carga que si podria aguantar si tuviera el while.
+     * Si mi cliente solo va a enviar un mensaje, o un mensaje cada 5 minutos, ahi si no conviene tener
+     * el while, sino construir el puente cada que me quiera enviar un mensaje
+     */
     @Override
     public void run() {
         try {
