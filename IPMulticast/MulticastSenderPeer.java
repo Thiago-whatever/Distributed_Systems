@@ -1,5 +1,3 @@
-package participants;
-
 import java.io.IOException;
 import java.net.DatagramPacket;
 import java.net.InetAddress;
@@ -25,6 +23,7 @@ public class MulticastSenderPeer {
             String myMessage = "Hello";
             byte[] m = myMessage.getBytes();
             DatagramPacket messageOut = new DatagramPacket(m, m.length, group, 49155);
+            //no hay costo de entrada/salida, no hay conexion
             socket.send(messageOut);
             socket.leaveGroup(group);
         } catch (SocketException e) {

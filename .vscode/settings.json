@@ -1,0 +1,9 @@
+{
+    "java.project.sourcePaths": [
+        "UDPSockets",
+        "TCP_Sockets_Lab",
+        "TCPSockets",
+        "HolaMundo/src",
+        "IPMulticast"
+    ]
+}

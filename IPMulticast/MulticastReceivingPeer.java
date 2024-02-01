@@ -1,5 +1,3 @@
-package participants;
-
 import java.io.IOException;
 import java.net.DatagramPacket;
 import java.net.InetAddress;
@@ -20,6 +18,8 @@ public class MulticastReceivingPeer {
             socket = new MulticastSocket(49155);
             socket.joinGroup(group);
             byte[] buffer = new byte[1000];
+            //Recibe tres mensajitos y luego se va
+            //el recieve es bloqueante, hasta que no llega el mensaje no avanza
             for (int i = 0; i < 3; i++) {
                 System.out.println("Waiting for messages");
                 DatagramPacket messageIn = new DatagramPacket(buffer, buffer.length);
