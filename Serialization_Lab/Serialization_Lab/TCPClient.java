@@ -1,26 +1,25 @@
-package participants;
-
+package Serialization_Lab;
 import java.net.*;
 import java.io.*;
 
 public class TCPClient {
 
-    public static void main(String args[]) {
+    public static void main(String args[]) throws ClassNotFoundException {
 
         Socket s = null;
+        Person me = new Person(1980,"Octavio");
 
         try {
             int serverPort = 49152;
 
             s = new Socket("localhost", serverPort);
             //s = new Socket("127.0.0.1", serverPort);
-            DataInputStream in = new DataInputStream(s.getInputStream());
-            DataOutputStream out = new DataOutputStream(s.getOutputStream());
+            ObjectInputStream in = new ObjectInputStream(s.getInputStream());
+            ObjectOutputStream out = new ObjectOutputStream(s.getOutputStream());
 
-            out.writeUTF("Hello");            // UTF is a string encoding
+            out.writeObject(me);            // UTF is a string encoding
 
-            String data = in.readUTF();
-            System.out.println("Received: " + data);
+            me = (Person) in.readObject();
 
         } catch (UnknownHostException e) {
             System.out.println("Sock:" + e.getMessage());

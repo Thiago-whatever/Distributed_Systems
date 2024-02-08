@@ -1,4 +1,4 @@
-package participants;
+package Serialization_Lab;
 
 import java.net.*;
 import java.io.*;
@@ -23,15 +23,15 @@ public class TCPServer {
 }
 
 class Connection extends Thread {
-    private DataInputStream in;
-    private DataOutputStream out;
+    private ObjectInputStream in;
+    private ObjectOutputStream out;
     private Socket clientSocket;
 
     public Connection(Socket aClientSocket) {
         try {
             clientSocket = aClientSocket;
-            in = new DataInputStream(clientSocket.getInputStream());
-            out = new DataOutputStream(clientSocket.getOutputStream());
+            in = new ObjectInputStream(clientSocket.getInputStream());
+            out = new ObjectOutputStream(clientSocket.getOutputStream());
         } catch (IOException e) {
             System.out.println("Connection:" + e.getMessage());
         }
@@ -41,16 +41,19 @@ class Connection extends Thread {
     public void run() {
         try {
             // an echo server
-            String data = in.readUTF();         // recibo solicitud
+            Person me  = (Person)in.readObject();   // recibo solicitud
 
             System.out.println("Message received from: " + clientSocket.getRemoteSocketAddress());
 
-            out.writeUTF(data);                // envio respuesta
+            out.writeObject(me);                // envio respuesta
 
         } catch (EOFException e) {
             System.out.println("EOF:" + e.getMessage());
         } catch (IOException e) {
             System.out.println("IO:" + e.getMessage());
+        } catch (ClassNotFoundException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
         } finally {
             try {
                 clientSocket.close();

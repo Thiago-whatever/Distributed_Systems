@@ -1,6 +1,7 @@
-package server;
+package Serialization_Lab;
+import java.io.Serializable;
 
-public class Person {
+public class Person implements Serializable{
     private int id;
     private String name;
 
