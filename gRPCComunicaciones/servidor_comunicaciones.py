@@ -14,13 +14,13 @@ class Comunicador(comunicaciones_pb2_grpc.ComunicadorServicer):
         #Para que me regrese todos los valores asociados
         #En cada iteracion va a enviar el siguiente objeto
         #hasta terminar de enviar todo
-        for elemento in Comunicador.elementos.values:
+        for elemento in Comunicador.elementos.values():
             yield elemento #Cada que tenga un stream tengo que usar yield
 
     def listador_elementos2(self, request, context):
         listado = [] #Poblar lista con todos los elementos
 
-        for elemento in Comunicador.elementos.values:
+        for elemento in Comunicador.elementos.values():
             listado.append(elemento)
 
         return comunicaciones_pb2.ListadoElementos(objetos = listado)
@@ -34,6 +34,9 @@ class Comunicador(comunicaciones_pb2_grpc.ComunicadorServicer):
             Comunicador.elementos[Comunicador.folio] = comunicaciones_pb2.Elemento(
                 id =  Comunicador.folio,
                 descripcion = elemento.descripcion)
+        for elemento in Comunicador.elementos.values():
+            print(elemento, elemento.id, elemento.descripcion)
+
         return comunicaciones_pb2.Status(success=True)
     
 def run():
@@ -45,5 +48,5 @@ def run():
     servidor.start()
     servidor.wait_for_termination()
         
-if __name__ == "main":
+if __name__ == "__main__":
     run()
