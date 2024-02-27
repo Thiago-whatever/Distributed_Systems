@@ -13,6 +13,31 @@ class Servidor(vendedores_pb2_grpc.ComunicadorServicer):
     productos = {}
     asignaciones = {}
 
+    def Registro_Vendedor(self, request, context):
+        Servidor.folio_vendedores += 1
+        Servidor.vendedores[Servidor.folio_vendedores] = vendedores_pb2.RegistroVendedor(
+            id = Servidor.folio_vendedores,
+            nombre= request.nombre,
+            edad = request.edad,
+            salario = request.salario)
+        return vendedores_pb2.Status(success=True)
+        
+    def Registro_Tienda(self, request, context):
+        Servidor.folio_tiendas += 1
+        Servidor.tiendas[Servidor.folio_tiendas] = vendedores_pb2.RegistroTienda(
+            id = Servidor.folio_tiendas,
+            descripcion = request.descripcion,
+            delegacion= request.delegacion)
+        return vendedores_pb2.Status(success=True)
+    
+    def Registro_Asignacion(self, request, context):
+        Servidor.folio_asignaciones += 1
+        Servidor.vendedores[Servidor.folio_asignaciones] = vendedores_pb2.RegistroTienda(
+            idAsignacion = Servidor.folio_asignaciones,
+            idTienda = request.idTienda,
+            idVendedor= request.idVendedor)
+        return vendedores_pb2.Status(success=True)
+
     def listador_tiendas(self, request, context):
         for elemento in Servidor.tiendas.values():
             yield elemento
