@@ -48,17 +48,17 @@ class RegistroTienda(_message.Message):
     def __init__(self, id: _Optional[int] = ..., descripcion: _Optional[str] = ..., delegacion: _Optional[str] = ...) -> None: ...
 
 class RegistroAsignacion(_message.Message):
-    __slots__ = ("idAsignacion", "idTienda", "idVendedor")
-    IDASIGNACION_FIELD_NUMBER: _ClassVar[int]
-    IDTIENDA_FIELD_NUMBER: _ClassVar[int]
-    IDVENDEDOR_FIELD_NUMBER: _ClassVar[int]
-    idAsignacion: int
-    idTienda: int
-    idVendedor: int
-    def __init__(self, idAsignacion: _Optional[int] = ..., idTienda: _Optional[int] = ..., idVendedor: _Optional[int] = ...) -> None: ...
+    __slots__ = ("id", "id_vendedor", "id_tienda")
+    ID_FIELD_NUMBER: _ClassVar[int]
+    ID_VENDEDOR_FIELD_NUMBER: _ClassVar[int]
+    ID_TIENDA_FIELD_NUMBER: _ClassVar[int]
+    id: int
+    id_vendedor: int
+    id_tienda: int
+    def __init__(self, id: _Optional[int] = ..., id_vendedor: _Optional[int] = ..., id_tienda: _Optional[int] = ...) -> None: ...
 
 class ListadoAsignaciones(_message.Message):
-    __slots__ = ("objetos",)
-    OBJETOS_FIELD_NUMBER: _ClassVar[int]
-    objetos: _containers.RepeatedCompositeFieldContainer[RegistroAsignacion]
-    def __init__(self, objetos: _Optional[_Iterable[_Union[RegistroAsignacion, _Mapping]]] = ...) -> None: ...
+    __slots__ = ("asignaciones",)
+    ASIGNACIONES_FIELD_NUMBER: _ClassVar[int]
+    asignaciones: _containers.RepeatedCompositeFieldContainer[RegistroAsignacion]
+    def __init__(self, asignaciones: _Optional[_Iterable[_Union[RegistroAsignacion, _Mapping]]] = ...) -> None: ...
