@@ -3,9 +3,17 @@
         "UDPSockets",
         "TCP_Sockets_Lab",
         "TCPSockets",
+        "Serialization_Lab",
         "IPMulticastClock",
         "IPMulticast",
         "HolaMundo/src",
-        "Serialization_Lab"
+        "JMSqueueAMQ"
+    ],
+    "java.project.referencedLibraries": [
+        "lib/**/*.jar",
+        "c:\\Program Files\\apache-activemq-6.0.1\\activemq-all-6.0.1.jar",
+        "c:\\Program Files\\apache-activemq-6.0.1\\lib\\optional\\log4j-api-2.22.0.jar",
+        "c:\\Program Files\\apache-activemq-6.0.1\\lib\\optional\\log4j-core-2.22.0.jar",
+        "c:\\Program Files\\apache-activemq-6.0.1\\lib\\optional\\log4j-slf4j2-impl-2.22.0.jar"
     ]
 }
