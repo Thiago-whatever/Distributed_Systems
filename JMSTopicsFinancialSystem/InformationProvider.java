@@ -47,12 +47,12 @@ public class InformationProvider {
                 newsLevel = rand.nextInt(10)+1; //Generates random number between 1 and 10
 
                 textMessage.setText(newsLevel +" I have to be patient. There is no such thing as a 'global economic crisis'");
-                System.out.println("Sending the following message: " + textMessage.getText());
+                System.out.println("Sending terrible market news. Level: " +newsLevel+ ". Category: "+subject);
                 messageProducer.send(textMessage);
             }
 
             textMessage.setText("Good bye!");
-            System.out.println("Sending the following message: " + textMessage.getText());
+            System.out.println("Sending good bye");
             messageProducer.send(textMessage);
 
             messageProducer.close();
