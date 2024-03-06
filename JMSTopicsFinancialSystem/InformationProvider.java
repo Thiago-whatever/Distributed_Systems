@@ -34,28 +34,36 @@ public class InformationProvider {
             Connection connection = connectionFactory.createConnection();
             connection.start();
 
-            numCategory = rand.nextInt(5); //Generates random number between 0 and 4
-            subject = categories[numCategory];
             Session session = connection.createSession(false /*Transacter*/, Session.AUTO_ACKNOWLEDGE);
-            Destination destination = session.createQueue(subject);
-
-            messageProducer = session.createProducer(destination);
-            textMessage = session.createTextMessage();
-
+            Destination destination;
 
             for(int i = 0; i < numMessages; i++){
+                numCategory = rand.nextInt(5); //Generates random number between 0 and 4
+                subject = categories[numCategory];
+                destination = session.createTopic(subject);
                 newsLevel = rand.nextInt(10)+1; //Generates random number between 1 and 10
 
-                textMessage.setText(newsLevel +" I have to be patient. There is no such thing as a 'global economic crisis'");
+                messageProducer = session.createProducer(destination);
+                textMessage = session.createTextMessage();
+
+                textMessage.setText(String.valueOf(newsLevel));
                 System.out.println("Sending terrible market news. Level: " +newsLevel+ ". Category: "+subject);
                 messageProducer.send(textMessage);
             }
 
-            textMessage.setText("Good bye!");
-            System.out.println("Sending good bye");
-            messageProducer.send(textMessage);
+            for(int i = 0; i<5; i++){
+                subject = categories[i];
+                destination= session.createTopic(subject);
+                messageProducer = session.createProducer(destination);
+                textMessage = session.createTextMessage();
+                
+                textMessage.setText("Good bye!");
+                System.out.println("Sending good bye");
+                messageProducer.send(textMessage);
 
-            messageProducer.close();
+                messageProducer.close();
+            }
+            
             session.close();
             connection.close();
         } catch (JMSException e) {
