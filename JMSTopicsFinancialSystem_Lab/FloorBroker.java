@@ -33,20 +33,29 @@ public class FloorBroker {
 
             Session session = connection.createSession(false /*Transacter*/, Session.AUTO_ACKNOWLEDGE);
 
-            Destination destination = session.createQueue(subject);
+            Destination destination = session.createTopic(subject);
 
             MessageConsumer messageConsumer = session.createConsumer(destination);
 
             while (!goodByeReceived) {
                 System.out.println("Waiting for messages...");
+                System.out.println("I'm a floor broker handling "+subject+ " accounts");
+
                 TextMessage textMessage = (TextMessage) messageConsumer.receive();
-                if (textMessage != null) {
-                    System.out.print("Received the following message: ");
-                    System.out.println(textMessage.getText());
-                    System.out.println();
+                if (textMessage != null && !textMessage.getText().equals("Good bye!")) {
+                    int level = Integer.parseInt(textMessage.getText());
+                    System.out.println("I received bad news of level: "+level);
+                    if(level < 5){
+                        
+                        System.out.println("I have to be patient. There is no such thing as a 'global economic crisis'");
+                    }
+                    else{
+                        System.out.println("Selling! Selling! Selling!");
+                    }
                 }
                 if (textMessage.getText() != null && textMessage.getText().equals("Good bye!")) {
                     goodByeReceived = true;
+                    System.out.println("Financial session ended");
                 }
             }
 
@@ -58,5 +67,10 @@ public class FloorBroker {
             e.printStackTrace();
         }
     }
+
+    //Proof that (One) FloorBroker receives messages
+    // public static void main(String[] args) {
+    //     new FloorBroker("Transportation").getMessages();
+    // }
 
 }

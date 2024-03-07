@@ -49,6 +49,7 @@ public class InformationProvider {
                 textMessage.setText(String.valueOf(newsLevel));
                 System.out.println("Sending terrible market news. Level: " +newsLevel+ ". Category: "+subject);
                 messageProducer.send(textMessage);
+                Thread.sleep(2000);
             }
 
             for(int i = 0; i<5; i++){
@@ -63,16 +64,19 @@ public class InformationProvider {
 
                 messageProducer.close();
             }
-            
+
             session.close();
             connection.close();
         } catch (JMSException e) {
+            e.printStackTrace();
+        } catch (InterruptedException e) {
+            // TODO Auto-generated catch block
             e.printStackTrace();
         }
     }
 
 
     public static void main(String[] args) {
-        new InformationProvider().produceMessages(5);
+        new InformationProvider().produceMessages(15);
     }
 }
