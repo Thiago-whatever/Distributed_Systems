@@ -1,31 +1,30 @@
 import java.io.IOException;
 import java.net.DatagramPacket;
 import java.net.InetAddress;
-import java.net.NetworkInterface;
 import java.net.MulticastSocket;
 import java.net.SocketException;
-import java.util.Enumeration;
 
 /**
  * @author Octavio Gutierrez
  */
-public class MulticastReceivingPeer {
+public class MulticastSenderPeer_1 {
 
     public static void main(String args[]) {
         MulticastSocket socket = null;
         try {
             InetAddress group = InetAddress.getByName("228.5.6.7"); // destination multicast group
+            //tiene que estar en el rango de direcciones multicast, sino hay error
+            //CAMBIAR direccion multicast sino va a seguir escuchando todos
+            //cuando, por ejemplo, otros equipos estan usando esa direccion (a la hora de revision de proyecto)
             socket = new MulticastSocket(49155);
             socket.joinGroup(group);
-            byte[] buffer = new byte[1000];
-            //Recibe tres mensajitos y luego se va
-            //el recieve es bloqueante, hasta que no llega el mensaje no avanza
-            for (int i = 0; i < 3; i++) {
-                System.out.println("Waiting for messages");
-                DatagramPacket messageIn = new DatagramPacket(buffer, buffer.length);
-                socket.receive(messageIn);
-                System.out.println("Message: " + new String(messageIn.getData()).trim() + " from: " + messageIn.getAddress());
-            }
+            //s.setTimeToLive(10);
+            System.out.println("Messages' TTL (Time-To-Live): " + socket.getTimeToLive());
+            String myMessage = "Hello";
+            byte[] m = myMessage.getBytes();
+            DatagramPacket messageOut = new DatagramPacket(m, m.length, group, 49155);
+            //no hay costo de entrada/salida, no hay conexion
+            socket.send(messageOut);
             socket.leaveGroup(group);
         } catch (SocketException e) {
             System.out.println("Socket: " + e.getMessage());
@@ -35,5 +34,4 @@ public class MulticastReceivingPeer {
             if (socket != null) socket.close();
         }
     }
-
 }
