@@ -5,11 +5,11 @@
         "TCPSockets",
         "Serialization_Lab",
         "JMSqueueAMQ",
-        "JMSTopicsFinancialSystem",
+        "JMSTopicsFinancialSystem_Lab",
         "IPMulticastClock",
         "IPMulticast",
         "HolaMundo/src",
-        "JMSTopicsFinancialSystem_Lab"
+        "Parcial_Lab"
     ],
     "java.project.referencedLibraries": [
         "lib/**/*.jar",
