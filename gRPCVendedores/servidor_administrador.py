@@ -1,9 +1,9 @@
 from concurrent import futures
 import grpc
-import vendedores_pb2_grpc
-import vendedores_pb2
+import administracion_pb2
+import administracion_pb2_grpc
 
-class Servidor(vendedores_pb2_grpc.ComunicadorServicer):
+class Administrador (administracion_pb2_grpc.AdministracionServicer):
     folio_vendedores = 0
     folio_productos = 0
     folio_tiendas = 0
@@ -13,57 +13,69 @@ class Servidor(vendedores_pb2_grpc.ComunicadorServicer):
     productos = {}
     asignaciones = {}
 
-    def Registro_Vendedor(self, request, context):
-        Servidor.folio_vendedores += 1
-        Servidor.vendedores[Servidor.folio_vendedores] = vendedores_pb2.RegistroVendedor(
-            id = Servidor.folio_vendedores,
-            nombre= request.nombre,
-            edad = request.edad,
-            salario = request.salario)
-        return vendedores_pb2.Status(success=True)
-        
-    def Registro_Tienda(self, request, context):
-        Servidor.folio_tiendas += 1
-        Servidor.tiendas[Servidor.folio_tiendas] = vendedores_pb2.RegistroTienda(
-            id = Servidor.folio_tiendas,
-            descripcion = request.descripcion,
-            delegacion= request.delegacion)
-        return vendedores_pb2.Status(success=True)
+    def registrar_vendedor(self, request, context): # (RegistroVendedor) 
+        Administrador.folio_vendedores += 1 
+        Administrador.vendedores[Administrador.folio_vendedores] = administracion_pb2.RegistroVendedor(id=Administrador.folio_vendedores, nombre=request.nombre, edad=request.edad, salario=request.salario)
+        for vendedor in Administrador.vendedores.values(): 
+            print(len(Administrador.vendedores.values()), type(vendedor), vendedor)
+        return administracion_pb2.Status(success=True)
     
-    def Registro_Asignacion(self, request, context):
-        Servidor.folio_asignaciones += 1
-        Servidor.vendedores[Servidor.folio_asignaciones] = vendedores_pb2.RegistroTienda(
-            idAsignacion = Servidor.folio_asignaciones,
-            idTienda = request.idTienda,
-            idVendedor= request.idVendedor)
-        return vendedores_pb2.Status(success=True)
+    def registrar_tienda(self, request, context): # (RegistroTienda) 
+        Administrador.folio_tiendas += 1 
+        Administrador.tiendas[Administrador.folio_tiendas] = administracion_pb2.RegistroTienda(id=Administrador.folio_tiendas, descripcion=request.descripcion, delegacion=request.delegacion)
+        for tienda in Administrador.tiendas.values(): 
+            print(len(Administrador.tiendas.values()), type(tienda), tienda)
+        return administracion_pb2.Status(success=True)
 
-    def listador_tiendas(self, request, context):
-        for elemento in Servidor.tiendas.values():
-            yield elemento
-
-    def listador_asignaciones(self, request, context):
-        for elemento in Servidor.asignaciones.values():
-            yield elemento
+    def asignar_a_tienda(self, request, context): # (SolicitudAsignacion) 
+        try:
+            Administrador.vendedores[request.id_vendedor] 
+            Administrador.tiendas[request.id_tienda]
+            Administrador.folio_asignaciones += 1
+            Administrador.asignaciones[Administrador.folio_asignaciones] = administracion_pb2.RegistroAsignacion(id=Administrador.folio_asignaciones, id_tienda = request.id_tienda)
+            for asignacion in Administrador.asignaciones.values(): 
+                print(len(Administrador.asignaciones.values()), type(asignacion), asignacion)
+            return administracion_pb2.Status(success=True)
+        except:
+            return administracion_pb2.Status(success=False)
+            
     
-    def listador_productos(self, request, context):
-        for elemento in Servidor.productos.values():
-            yield elemento
+    def listado_tiendas(self, request, context): # (Empty)   
+        for tienda in Administrador.tiendas.values(): 
+            yield tienda
 
-    def agregador(self, request_iterator, context):
-        for elemento in request_iterator:
-            Servidor.folio_productos += 1
-            Servidor.productos[Servidor.folio_productos] = vendedores_pb2.Producto(
-                id = Servidor.folio_productos,
-                cantidad = elemento.cantidad,
-                descripcion= elemento.descripcion)
-        for elemento in Servidor.productos.values:
-            print(elemento, elemento.id, elemento.cantidad, elemento.descripcion)
+    def listado_productos(self, request, context): # (Empty)   
+        for producto in Administrador.productos.values(): 
+            yield producto
 
-        return vendedores_pb2.Status(success=True)
-    
-def run():
-    print("hola mundo")
+    def listado_vendedores(self, request, context): # (Empty) 
+        for vendedor in Administrador.vendedores.values(): 
+            yield vendedor
+
+    def listado_asignaciones(self, request, context): # (Empty) 
+        mis_asignaciones = []
+        for asignacion in Administrador.asignaciones.values(): 
+             mis_asignaciones.append(asignacion)
+        return administracion_pb2.ListadoAsignaciones(asignaciones=mis_asignaciones)
+
+    def agrega_productos(self, request_iterator, context):
+        for producto in request_iterator: 
+            Administrador.folio_productos += 1 
+            Administrador.productos[Administrador.folio_productos] = administracion_pb2.Producto(id=Administrador.folio_productos, 
+                                                                                                 cantidad=producto.cantidad, 
+                                                                                                 descripcion=producto.descripcion)
+        return administracion_pb2.Status(success=True)
+
+
+def ofrece_servicios():
+    puerto = "50051"
+    servidor = grpc.server(futures.ThreadPoolExecutor(max_workers=10))
+    administracion_pb2_grpc.add_AdministracionServicer_to_server(Administrador(), servidor)
+    servidor.add_insecure_port("[::]:" + puerto)
+    servidor.start()
+    servidor.wait_for_termination()
 
 if __name__ == "__main__":
-    run()
+    print("Ofreciendo servicios de administración")
+    ofrece_servicios()
+    
