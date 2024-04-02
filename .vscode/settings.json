@@ -4,12 +4,10 @@
         "TCP_Sockets_Lab",
         "TCPSockets",
         "Serialization_Lab",
-        "JMSqueueAMQ",
-        "JMSTopicsFinancialSystem_Lab",
         "IPMulticastClock",
         "IPMulticast",
         "HolaMundo/src",
-        "Parcial_Lab"
+        "JMSQueuesThePotatoGame"
     ],
     "java.project.referencedLibraries": [
         "lib/**/*.jar",
