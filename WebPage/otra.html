@@ -6,6 +6,13 @@
     <title>Otra</title>
 </head>
 <body>
-    
+    <script>
+        const all_parameters = window.location.search;
+        document.write("Estos son los parametros:"+ all_parameters);
+        const urlParams = new URLSearchParams(all_parameters);
+        const nombre = urlParams.get("nombre");
+        console.log(nombre);
+        document.write("Este el nombre:"+ nombre);
+    </script>
 </body>
 </html>

@@ -39,6 +39,7 @@
     <a href="https://www.google.com" target="_self">Vinculo self</a>
 
     <form action="otra.html" method="get">
+        <input type="hidden" name="oculto" value="secreto">
         <label for="nombre">Ingresa tu nombre:</label><br>
         <input type="text" id="nombre" name="nombre"><br>
 
@@ -63,14 +64,12 @@
         <label for="opcion">Esta una opción </label> <br>
 
         <label for="texto_largo">Escribe algo:</label> <br>
-        <textarea name="texto_largo" id = "texto_largo" rows="10" cols="30">
-        Este es un mensaje largo
-        </textarea><br>
+        <textarea name="texto_largo" id = "texto_largo" rows="10" cols="30">Este es un mensaje largo</textarea><br>
 
         <input type="submit" value="Enviar">
 
         <input type="reset" value="Borrar">
-        
+
         <input type="button" value="Genérico">
     </form>
 
