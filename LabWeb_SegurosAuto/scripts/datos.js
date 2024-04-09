@@ -1,4 +1,4 @@
-document.getElementById().onsubmit = function(event){
+document.getElementById("enviar").onsubmit = function(event){
     event.preventDefault();
     const nombre = document.getElementById('nombre').value;
     const apellido = document.getElementById('apellido').value;
