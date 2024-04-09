@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mi Primera pagina web</title>
+</head>
+<body>
+
+    <span id="datosdebd">Este seria un contenedor de datos</span>
+    
+ 
+    <form action="otra.html" method="get">
+        <table>
+            <tr>
+            <th>Campo</th>
+            <th>Valor</th>
+            </tr>
+            <tr>
+            <td><label for="nombre">Nombre</label><br></td>
+            <td><input type="text" id="nombre" name="nombre"><br> </td>
+            </tr>
+            <tr>
+                <td><label for="apellido">Apellido</label><br></td>
+                <td><input type="text" id="apellido" name="apellido"><br> </td>
+            </tr>
+            <tr>
+                <td><label for="genero">Genero</label><br></td>
+                <td><input type="radio" id="genMujer" name="genero" value="mujer"> 
+                    <label for="tipo"> Mujer </label>
+            
+                    <input type="radio" id="genHombre" name="genero" value="hombre"> 
+                    <label for="tipo2"> Hombre</label>
+                </td>
+                
+            </tr>
+            <tr>
+                <td><label for="edad">Edad</label><br></td>
+                <td><input type="text" id="edad" name="edad"><br> </td>
+            </tr>
+            <tr>
+                <td><label for="estado">Estado:</label><br></td>
+                <td>
+                    <select id="estado" name="estado" >
+                        <option value="a">Letra a</option>
+                        <option value="b" >Letra b</option>
+                        <option value="c">Letra c</option>
+                    </select><br>
+                </td>
+            </tr>
+            <tr>
+                <td><input type="submit" value="Limpiar"></td>
+                <td><input type="submit" value="Enviar"></td>
+                </tr>
+        </table> 
+        
+    </form>
+<!--
+    <span id ="one".></span>
+    <input type="button" value="change" onclick="changeText('one');" />
+
+    <br>
+    <img id="myimage" onclick="changeImage()" src="images/Burro1.jpg" >
+         -->
+    
+    <script src="scripts/codigo.js" defer></script>
+</body>
+</html>
