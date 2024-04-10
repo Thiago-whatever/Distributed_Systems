@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mi Primera pagina web</title>
+</head>
+<body>
+    <p>En el break entregare calificaciones a los que faltaron la clase pasada</p>
+    <span id="datosdebd">Este seria un contenedor de datos</span>
+    <table>
+        <tr>
+        <th>Nombre</th>
+        <th>Edad</th>
+        </tr>
+        <tr>
+        <td>Jose</td>
+        <td>55</td>
+        </tr>
+        <tr>
+        <td>Luis</td>
+        <td>48</td>
+        </tr>
+    </table> 
+
+    <ol>
+        <li>Elemento A</li>
+        <li>Elemento B</li>
+        <li>Elemento C</li>
+    </ol>
+
+    <ul>
+        <li>Elemento A</li>
+        <li>Elemento B</li>
+        <li>Elemento C</li>
+    </ul>
+
+    <a href="https://www.google.com" target="_blank">Vinculo black</a>
+    <a href="https://www.google.com" target="_self">Vinculo self</a>
+
+    <form action="otra.html" method="get">
+        <input type="hidden" name="oculto" value="secreto">
+        <label for="nombre">Ingresa tu nombre:</label><br>
+        <input type="text" id="nombre" name="nombre"><br>
+
+        <p>Selecciona un tipo</p>
+        <input type="radio" id="tipo" name="tipo" value="basico" checked> 
+        <label for="tipo"> Tipo 1 </label>
+
+        <input type="radio" id="tipo2" name="tipo" value="intermedio"> 
+        <label for="tipo2"> Tipo 2 </label>
+
+        <input type="radio" id="tipo3" name="tipo" value="avanzado"> 
+        <label for="tipo3"> Tipo 3 </label><br>
+
+        <label for="tipo">Selecciona una letra</label>
+        <select id="letra" name="letra" >
+            <option value="a">Letra a</option>
+            <option value="b" selected>Letra b</option>
+            <option value="c">Letra c</option>
+        </select><br>
+
+        <input type="checkbox" id="opcion" name="opcion" checked><br>
+        <label for="opcion">Esta una opción </label> <br>
+
+        <label for="texto_largo">Escribe algo:</label> <br>
+        <textarea name="texto_largo" id = "texto_largo" rows="10" cols="30">Este es un mensaje largo</textarea><br>
+
+        <input type="submit" value="Enviar">
+
+        <input type="reset" value="Borrar">
+
+        <input type="button" value="Genérico">
+    </form>
+
+    <span id ="one".></span>
+    <input type="button" value="change" onclick="changeText('one');" />
+
+    <br>
+    <img id="myimage" onclick="changeImage()" src="images/Burro1.jpg" >
+        
+    <h1>Titulo A</h1>
+    <br><br>
+    <h2>Titulo B</h2>
+    <br>
+    <h3>Titulo C</h3>
+    <h4>Titulo D</h4>
+    <h5>Titulo E</h5>
+    <h6>Titulo F</h6>
+    <script src="scripts/codigo.js" defer></script>
+</body>
+</html>
