@@ -6,26 +6,21 @@ app = Flask(__name__)
 modelo = pickle.load(open('modelo.pkl','rb'))
 
 @app.route('/cambio', methods=['POST'])
-def clasificaweb():
-    entrada = [np.array([int(request.form["frecuencia"])])]
-    prediccion = modelo.predict(entrada)
-    resultado = ""
-    if prediccion[0]==0:
-        resultado="Sano"
-    else:
-        resultado="Taquicardia"
-    return render_template('index.html', clasificacion=resultado)
+def cambio():
+    presentCurrency = str(request.form["presentCurrency"])
+    futureCurrency = str(request.form["futureCurrency"])
+    amount = int(request.form["presentAmount"])
 
-@app.route('/clasificaapi', methods=['POST'])
-def clasificaapi():
-    entrada = request.get_json(force=True)
-    prediccion = modelo.predict([np.array([int(entrada["frecuencia"])])])
-    resultado = ""
-    if prediccion[0]==0:
-        resultado="Sano-"
+    if(futureCurrency == "Mexico"):
+        resultado = amount *2
+    elif(futureCurrency == "Britain"):
+        resultado = amount *0.75
+    elif(futureCurrency == "Canada"):
+        resultado = amount *1.5
     else:
-        resultado="Taquicardia-"
-    return jsonify(resultado)
+        resultado = amount *0.3
+
+    return render_template('index.html', cambio=resultado)
 
 @app.route('/')
 def home():
