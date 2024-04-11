@@ -5,7 +5,7 @@ import pickle
 app = Flask(__name__)
 modelo = pickle.load(open('modelo.pkl','rb'))
 
-@app.route('/clasificaweb', methods=['POST'])
+@app.route('/cambio', methods=['POST'])
 def clasificaweb():
     entrada = [np.array([int(request.form["frecuencia"])])]
     prediccion = modelo.predict(entrada)

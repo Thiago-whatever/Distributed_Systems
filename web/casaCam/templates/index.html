@@ -6,70 +6,70 @@
 	</head>
 	<body>
 		<h1>Casa Cambio</h1>
-		<table>
-			<thead>
-				<tr>
-					<th>Currency I have</th>
-					<th>Amount</th>
-					<th>Currency I want</th>
-					<th>Amount</th>
-				</tr>
-			</thead>
-			<tbody>
-				<tr>
-					<td>
-						<select
-							name="presentCurrency"
-							id="presentCurrency"
-						>
-							<option value="Mexico">Mexican Peso</option>
-							<option value="Britain">British Pound</option>
-							<option value="Canada">Canadian Dolar</option>
-							<option value="USA">US Dollar</option>
-						</select>
-					</td>
-					<td>
-						<input
-							type="text"
-							id="modelo"
-							name="modelo"
-						/>
-					</td>
-					<td>
-						<select
-							name="futureCurrency"
-							id="futureCurrency"
-						>
-							<option value="Mexico">Mexican Peso</option>
-							<option value="Britain">British Pound</option>
-							<option value="Canada">Canadian Dolar</option>
-							<option value="USA">US Dollar</option>
-						</select>
-					</td>
-					<td>
-						<input
-							type="text"
-							id="placas"
-							name="placas"
-						/>
-					</td>
-				</tr>
-			</tbody>
-		</table>
-
 		<form
-			action="{{url_for('clasificaweb')}}"
+			action="{{url_for('cambio')}}"
 			method="post"
 		>
-			<input
+			<table>
+				<thead>
+					<tr>
+						<th>Currency I have</th>
+						<th>Amount</th>
+						<th>Currency I want</th>
+						<th>Amount</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr>
+						<td>
+							<select
+								name="presentCurrency"
+								id="presentCurrency"
+							>
+								<option value="Mexico">Mexican Peso</option>
+								<option value="Britain">British Pound</option>
+								<option value="Canada">Canadian Dolar</option>
+								<option value="USA">US Dollar</option>
+							</select>
+						</td>
+						<td>
+							<input
+								type="text"
+								id="modelo"
+								name="modelo"
+							/>
+						</td>
+						<td>
+							<select
+								name="futureCurrency"
+								id="futureCurrency"
+							>
+								<option value="Mexico">Mexican Peso</option>
+								<option value="Britain">British Pound</option>
+								<option value="Canada">Canadian Dolar</option>
+								<option value="USA">US Dollar</option>
+							</select>
+						</td>
+						<td>
+							<input
+								type="text"
+								id="placas"
+								name="placas"
+							/>
+						</td>
+					</tr>
+				</tbody>
+			</table>
+			<!-- <input
 				type="number"
 				id="frecuencia"
 				name="frecuencia"
 				min="0"
 				max="400"
-			/>
+			/> -->
 			<button type="submit">Convert</button>
 		</form>
+
 		<br />
 		{{clasificacion}}
 	</body>
