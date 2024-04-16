@@ -27,7 +27,7 @@
                         </select>
                     </td>
                     <td>
-                        <input type="text" name="presentAmount" value="{{ presentAmount }}"/>
+                        <input type="text" id="presentAmount" name="presentAmount" value="{{ presentAmount }}"/>
                     </td>
                     <td>
                         <select name="futureCurrency" id="futureCurrency">
@@ -50,7 +50,9 @@
     <script>
         async function exchange(){
             const response = await fetch("/exchange?currency1=" +
-            document.getElementById("presentCurrency").value+"currency2="+document.getElementById("futureCurrency"));
+            document.getElementById("presentCurrency").value+
+            "currency2="+document.getElementById("futureCurrency").value+
+            "presentAmount="+document.getElementById("presentAmount").value);
             response.text().then(function (output_amount) {
             document.getElementById("newAmount").value = output_amount;
             });
