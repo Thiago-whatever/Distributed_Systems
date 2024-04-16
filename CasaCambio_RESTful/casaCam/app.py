@@ -11,16 +11,24 @@ def cambio():
     futureCurrency = str(request.form["futureCurrency"])
     amount = int(request.form["presentAmount"])
 
-    if(futureCurrency == "Mexico"):
-        resultado = amount *2
-    elif(futureCurrency == "Britain"):
-        resultado = amount *0.75
-    elif(futureCurrency == "Canada"):
-        resultado = amount *1.5
-    else:
-        resultado = amount *0.3
+    exchange_rates_USD = {
+        "USA": 1.0,
+        "Mexico": 16.0,
+        "Britain": 0.8,
+        "Canada": 1.38
+    }
 
-    return render_template('index.html', cambio=resultado)
+    if(presentCurrency == "USA"):
+        resultado = amount * exchange_rates_USD[futureCurrency]
+    else:
+        presentCurrencyUSD = amount / exchange_rates_USD[presentCurrency]
+        resultado = presentCurrencyUSD * exchange_rates_USD[futureCurrency]
+    
+
+    return render_template('index.html', newAmount=resultado,
+                           presentCurrency=presentCurrency,
+                           futureCurrency=futureCurrency,
+                           presentAmount=amount)
 
 @app.route('/')
 def home():
