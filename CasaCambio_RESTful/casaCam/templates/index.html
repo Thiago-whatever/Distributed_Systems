@@ -41,9 +41,20 @@
                         <input type="text" id="newAmount" name="newAmount" value="{{ newAmount }}"/>
                     </td>
                 </tr>
+
+                
             </tbody>
         </table>
         <button type="submit">Convert</button>
     </form>
+    <script>
+        async function exchange(){
+            const response = await fetch("/exchange?currency1=" +
+            document.getElementById("presentCurrency").value+"currency2="+document.getElementById("futureCurrency"));
+            response.text().then(function (output_amount) {
+            document.getElementById("newAmount").value = output_amount;
+            });
+        }
+    </script>
 </body>
 </html>
