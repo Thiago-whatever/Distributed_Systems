@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title>Index page</title>
+    </head>
+    <body>
+        <p>Listado de estudiantes</p>
+        {% if estudiantes %}
+        <ul>
+        {% for estudiante in estudiantes %}
+            <li><a href="/myfirstapp/{{ estudiante.id }}/detalles">
+                    {{estudiante.nombre}} 
+                    {{estudiante.apellidos}} 
+                </a></li>
+        {% endfor %}
+        </ul>
+        {% else %}
+            <p>No hay estudiantes registrados.</p>
+        {% endif %}
+    </body>
+</html>
