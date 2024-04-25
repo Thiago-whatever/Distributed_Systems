@@ -2,7 +2,7 @@ from django.shortcuts import render
 from django.http import HttpResponse
 from .models import Estudiante, Carrera
 from django.template import loader
-from django.http import Http404
+from django.shortcuts import get_object_or_404
 
 
 # Create your views here.
@@ -27,9 +27,7 @@ def index(request):
     return render(request, "myfirstapp/index.html", context)
 
 def detalles(request, estudiante_id):
-    try:
-        estudiante = Estudiante.objects.get(pk=estudiante_id)
-    except Estudiante.DoesNotExist:
-        raise Http404()
+    estudiante = get_object_or_404(Estudiante, pk=estudiante_id)
     return render(request, "myfirstapp/detalles.html", 
     {"estudiante": estudiante})
+
