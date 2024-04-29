@@ -16,6 +16,12 @@
             {% else %}
                 <p>Local </p>
             {% endif %} 
+
+            <ul>
+            {% for carrera in estudiante.carrera_set.all %}
+                <li> {{ carrera.tipo }} {{ carrera.nombre }} </li>
+            {% endfor %}
+            </ul>
         {% endif %} 
     </body>
 </html>

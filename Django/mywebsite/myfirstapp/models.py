@@ -29,3 +29,6 @@ class Carrera(models.Model):
 
     def __str__(self):
         return str(self.tipo) + " " + self.nombre
+    
+    def get_tipo(self):
+        return Carrera.OPCIONES_TIPO[self.tipo-1][1]
