@@ -1,6 +1,8 @@
 from django.urls import path
 from . import views
 
+app_name = "myfirstapp" #Me permite poner urls de forma mas elegante    
+
 urlpatterns = [
     path("", views.index, name="index"),
 
@@ -12,6 +14,8 @@ urlpatterns = [
     
     # ejemplo: /myfirstapp/5/agrega_carrera/
     path("<int:estudiante_id>/agrega_carrera/", views.agrega_carrera, name="agrega_carrera"),
+
+    path("asincrono/", views.asincrono, name="asincrono"),
 
 ]
 

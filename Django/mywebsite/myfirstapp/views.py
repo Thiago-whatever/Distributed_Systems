@@ -1,5 +1,6 @@
 from django.shortcuts import render
 from django.http import HttpResponse
+import requests
 from .models import Estudiante, Carrera
 from django.template import loader
 from django.shortcuts import get_object_or_404
@@ -30,4 +31,16 @@ def detalles(request, estudiante_id):
     estudiante = get_object_or_404(Estudiante, pk=estudiante_id)
     return render(request, "myfirstapp/detalles.html", 
     {"estudiante": estudiante})
+
+async def asincrono(request):
+    url = "https://pokeapi.co/api/v2/pokemon?limit=100000&offset=0"
+    respuesta = requests.get(url)
+    print("-------------------",respuesta)
+    print(respuesta.json()) 
+    return HttpResponse("Respuesta asincrona %s." % respuesta.json())
+
+# async def asincrono(requeest):
+#     print("hola")
+#     return HttpResponse("Respuesta: hola")
+
 

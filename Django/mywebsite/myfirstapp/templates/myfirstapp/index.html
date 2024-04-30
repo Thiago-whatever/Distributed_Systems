@@ -5,11 +5,14 @@
         <title>Index page</title>
     </head>
     <body>
+        {% load static %}
+        <script src="{% static 'myfirstapp/myjavascript.js' %}"></script>
+
         <p>Listado de estudiantes</p>
         {% if estudiantes %}
         <ul>
         {% for estudiante in estudiantes %}
-            <li><a href="/myfirstapp/{{ estudiante.id }}/detalles">
+            <li><a href="{% url 'myfirstapp:detalles' estudiante.id %}">>
                     {{estudiante.nombre}} 
                     {{estudiante.apellidos}} 
                 </a></li>
@@ -18,5 +21,7 @@
         {% else %}
             <p>No hay estudiantes registrados.</p>
         {% endif %}
+
+        <input type="button" value="Prueba" onclick="hola();">
     </body>
 </html>
