@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8" />
+    <title>Casa Cambio</title>
+</head>
+<body>
+    <h1>Casa Cambio</h1>
+    <form action="{{ url_for('exchange') }}" method="get">
+        <table>
+            <thead>
+                <tr>
+                    <th>Currency I have</th>
+                    <th>Amount</th>
+                    <th>Currency I want</th>
+                    <th>Amount</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>
+                        <select name="presentCurrency" id="presentCurrency">
+                            <option value="Mexico" {{ 'selected' if presentCurrency == 'Mexico' else '' }}>Mexican Peso</option>
+                            <option value="Britain" {{ 'selected' if presentCurrency == 'Britain' else '' }}>British Pound</option>
+                            <option value="Canada" {{ 'selected' if presentCurrency == 'Canada' else '' }}>Canadian Dollar</option>
+                            <option value="USA" {{ 'selected' if presentCurrency == 'USA' else '' }}>US Dollar</option>
+                        </select>
+                    </td>
+                    <td>
+                        <input type="text" id="presentAmount" name="presentAmount" value="{{ presentAmount }}"/>
+                    </td>
+                    <td>
+                        <select name="futureCurrency" id="futureCurrency">
+                            <option value="Mexico" {{ 'selected' if futureCurrency == 'Mexico' else '' }}>Mexican Peso</option>
+                            <option value="Britain" {{ 'selected' if futureCurrency == 'Britain' else '' }}>British Pound</option>
+                            <option value="Canada" {{ 'selected' if futureCurrency == 'Canada' else '' }}>Canadian Dollar</option>
+                            <option value="USA" {{ 'selected' if futureCurrency == 'USA' else '' }}>US Dollar</option>
+                        </select>
+                    </td>
+                    <td>
+                        <input type="text" id="newAmount" name="newAmount" value="{{ newAmount }}"/>
+                    </td>
+                </tr>
+
+                
+            </tbody>
+        </table>
+        <button type="submit">Convert</button>
+    </form>
+    <script>
+        async function exchange(){
+            const response = await fetch("/exchange?currency1=" +
+            document.getElementById("presentCurrency").value+
+            "currency2="+document.getElementById("futureCurrency").value+
+            "presentAmount="+document.getElementById("presentAmount").value);
+            response.text().then(function (output_amount) {
+            document.getElementById("newAmount").value = output_amount;
+            });
+        }
+    </script>
+</body>
+</html>
